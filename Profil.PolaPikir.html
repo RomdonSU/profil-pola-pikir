@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pemetaan Profil Pola Pikir</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    padding: 20px;
+    color: #333;
+  }
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  .profile-card {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    background: white;
+  }
+  .profile-card.red {
+    border-left: 8px solid #e74c3c;
+  }
+  .profile-card.orange {
+    border-left: 8px solid #e67e22;
+  }
+  .profile-card.yellow {
+    border-left: 8px solid #f1c40f;
+  }
+  .profile-card.green {
+    border-left: 8px solid #27ae60;
+  }
+  .profile-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .profile-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .profile-desc {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  select {
+    display: block;
+    margin: 20px auto 40px auto;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    width: 260px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Pemetaan Profil Pola Pikir</h1>
+
+<select id="profileSelector" aria-label="Pilih Profil Pola Pikir">
+  <option value="" disabled selected>-- Pilih Profil --</option>
+  <option value="tetap">❌ Tetap</option>
+  <option value="tetapBertumbuh">⚠️ Tetap Bertumbuh</option>
+  <option value="bertumbuhTetap">🔄 Bertumbuh Tetap</option>
+  <option value="bertumbuh">✅ Bertumbuh</option>
+</select>
+
+<div id="profileCard" class="profile-card" style="display:none;">
+  <div class="profile-icon" id="profileIcon"></div>
+  <div class="profile-title" id="profileTitle"></div>
+  <div class="profile-desc" id="profileDesc"></div>
+</div>
+
+<script>
+  const profiles = {
+    tetap: {
+      colorClass: 'red',
+      icon: '❌',
+      title: 'Tetap',
+      desc: 'Pola pikir tetap, percaya kemampuan tidak bisa berubah, menghindari tantangan.'
+    },
+    tetapBertumbuh: {
+      colorClass: 'orange',
+      icon: '⚠️',
+      title: 'Tetap Bertumbuh',
+      desc: 'Mulai terbuka bertumbuh, tapi masih ragu dan takut gagal.'
+    },
+    bertumbuhTetap: {
+      colorClass: 'yellow',
+      icon: '🔄',
+      title: 'Bertumbuh Tetap',
+      desc: 'Percaya bertumbuh, tapi kadang kembali ke pola pikir tetap.'
+    },
+    bertumbuh: {
+      colorClass: 'green',
+      icon: '✅',
+      title: 'Bertumbuh',
+      desc: 'Yakin usaha dan belajar bisa meningkatkan kemampuan secara signifikan.'
+    }
+  };
+
+  const selector = document.getElementById('profileSelector');
+  const card = document.getElementById('profileCard');
+  const iconEl = document.getElementById('profileIcon');
+  const titleEl = document.getElementById('profileTitle');
+  const descEl = document.getElementById('profileDesc');
+
+  selector.addEventListener('change', () => {
+    const value = selector.value;
+    if (profiles[value]) {
+      const p = profiles[value];
+      card.className = 'profile-card ' + p.colorClass;
+      iconEl.textContent = p.icon;
+      titleEl.textContent = p.title;
+      descEl.textContent = p.desc;
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
